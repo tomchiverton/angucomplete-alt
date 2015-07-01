@@ -524,7 +524,7 @@
               if( matchCount==0 ){//try full string                  
                 for (s = 0; s < searchFields.length; s++) {
                   value = extractValue(scope.localData[i], searchFields[s]) || '';
-                  if( value.toLowerCase().indexOf(str.toLowerCase()) ){
+                  if( value.toLowerCase().indexOf(str.toLowerCase()) >= 0){
                     matchCount=strPartsCount;
                   }
                 }
