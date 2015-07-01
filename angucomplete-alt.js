@@ -498,14 +498,30 @@
         function getLocalResults(str) {
           var i, match, s, value,
               searchFields = scope.searchFields.split(','),
-              matches = [];
+              matches = [],
+              strParts=str.split(' '),
+              strPartsCount=strParts.length,
+              strIdx,matchCount
+              ;
 
           for (i = 0; i < scope.localData.length; i++) {
             match = false;
 
             for (s = 0; s < searchFields.length; s++) {
               value = extractValue(scope.localData[i], searchFields[s]) || '';
-              match = match || (value.toLowerCase().indexOf(str.toLowerCase()) >= 0);
+              if( strPartsCount == 1 ){
+                match = match || (value.toLowerCase().indexOf(str.toLowerCase()) >= 0);
+              }else{
+                for(strIdx = 0; strIdx < strPartsCount; strIdx++){
+                  if( value.toLowerCase().indexOf(strParts[strIdx].toLowerCase()) >= 0 ){
+                    matchCount++;
+                  }
+                }
+              }
+            }
+            
+            if( strPartsCount > 1 ){
+              match = match || (matchCount==strPartsCount);
             }
 
             if (match) {
