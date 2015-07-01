@@ -478,7 +478,7 @@
 
           scope.remoteApiHandler(str, httpCanceller.promise)
             .then(httpSuccessCallbackGen(str))
-            .catch(httpErrorCallback);
+            ["catch"](httpErrorCallback);
         }
 
         function clearResults() {
